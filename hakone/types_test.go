@@ -1,4 +1,4 @@
-package main
+package hakone
 
 import (
 	"github.com/stretchr/testify/assert"
