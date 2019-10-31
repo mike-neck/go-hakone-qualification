@@ -18,7 +18,7 @@ func makeBytes(x, y float64) pdf.Text {
 
 func TestDiscardingHeaderAnalyzer_Take(t *testing.T) {
 	texts := []pdf.Text{
-		makeText(1.0, 2.0, "2"),
+		makeText(1.0, 2.0, "2"), // 0
 		makeBytes(1.0, 2.0),
 		makeText(3.0, 2.0, "0"),
 		makeBytes(3.0, 2.0),
@@ -27,8 +27,8 @@ func TestDiscardingHeaderAnalyzer_Take(t *testing.T) {
 		makeText(7.0, 2.0, "9"),
 		makeBytes(7.0, 2.0),
 		makeText(9.0, 2.0, "備"),
-		makeBytes(9.0, 2.0), //9
-		makeText(11.0, 2.0, "　"),
+		makeBytes(9.0, 2.0),
+		makeText(11.0, 2.0, "　"), // 10
 		makeBytes(11.0, 2.0),
 		makeText(13.0, 2.0, "考"),
 		makeBytes(13.0, 2.0),
@@ -37,15 +37,19 @@ func TestDiscardingHeaderAnalyzer_Take(t *testing.T) {
 		makeText(17.0, 2.0, "-"),
 		makeBytes(17.0, 2.0),
 		makeText(19.0, 2.0, "-"),
-		makeBytes(19.0, 2.0), // 19
-		makeText(21.0, 2.0, "-"),
+		makeBytes(19.0, 2.0),
+		makeText(21.0, 2.0, "-"), // 20
 		makeBytes(21.0, 2.0),
 		makeText(23.0, 2.0, "-"),
 		makeBytes(23.0, 2.0),
 		makeText(25.0, 2.0, "-"),
 		makeBytes(25.0, 2.0),
-		makeText(27.0, 2.0, "1"),
-		makeBytes(27.0, 2.0), // 27
+		makeText(27.0, 2.0, "1"), // 26
+		makeBytes(27.0, 2.0),
+		makeText(29.0, 2.0, "3"),
+		makeBytes(29.0, 2.0),
+		makeText(31.0, 2.0, "長"), // 30
+		makeBytes(31.0, 2.0),
 	}
 
 	var def DefaultAnalyzer
