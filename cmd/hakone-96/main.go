@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/ledongthuc/pdf"
-	"github.com/pkg/errors"
 	"github.com/mike-neck/go-hakone-qualification/hakone"
+	"github.com/pkg/errors"
 	"log"
 	"os"
 	"reflect"
@@ -71,14 +71,14 @@ func main() {
 }
 
 type LoadResult struct {
-	Record   Record
+	Record   hakone.Record
 	Position Position
 	Done     bool
 }
 
 func NextRecord(analyzer Analyzer, position Position, texts []pdf.Text) (*LoadResult, error) {
 	if position.isOutOfRangeOf(texts) {
-		result := LoadResult{Record: Record{}, Position: Position(len(texts)), Done: true}
+		result := LoadResult{Record: hakone.Record{}, Position: Position(len(texts)), Done: true}
 		return &result, errors.New("already done")
 	}
 	an := analyzer
@@ -90,7 +90,7 @@ func NextRecord(analyzer Analyzer, position Position, texts []pdf.Text) (*LoadRe
 	var times Times
 	t, an, pos := an.Take(pos, texts) // 5km
 	if t != emptyStr {
-		time, err := NewTime(t.value)
+		time, err := hakone.NewTime(t.value)
 		if err != nil {
 			return &LoadResult{}, errors.Wrapf(err, "invalid format time of TimeOf5km(%s) at %v", t.value, pos)
 		}
@@ -104,7 +104,7 @@ func NextRecord(analyzer Analyzer, position Position, texts []pdf.Text) (*LoadRe
 		pos = p
 	}
 	if t != emptyStr {
-		time, err := NewTime(t.value)
+		time, err := hakone.NewTime(t.value)
 		if err != nil {
 			return &LoadResult{}, errors.Wrapf(err, "invalid format time of TimeOf10km(%s) at %v", t.value, pos)
 		}
@@ -118,7 +118,7 @@ func NextRecord(analyzer Analyzer, position Position, texts []pdf.Text) (*LoadRe
 		pos = p
 	}
 	if t != emptyStr {
-		time, err := NewTime(t.value)
+		time, err := hakone.NewTime(t.value)
 		if err != nil {
 			return &LoadResult{}, errors.Wrapf(err, "invalid format time of TimeOf15km(%s) at %v", t.value, pos)
 		}
@@ -132,7 +132,7 @@ func NextRecord(analyzer Analyzer, position Position, texts []pdf.Text) (*LoadRe
 		pos = p
 	}
 	if t != emptyStr {
-		time, err := NewTime(t.value)
+		time, err := hakone.NewTime(t.value)
 		if err != nil {
 			return &LoadResult{}, errors.Wrapf(err, "invalid format time of TimeOf20km(%s) at %v", t.value, pos)
 		}
@@ -146,7 +146,7 @@ func NextRecord(analyzer Analyzer, position Position, texts []pdf.Text) (*LoadRe
 		pos = p
 	}
 	if t != emptyStr {
-		time, err := NewTime(t.value)
+		time, err := hakone.NewTime(t.value)
 		if err != nil {
 			return &LoadResult{}, errors.Wrapf(err, "invalid format time of TimeOfFinish(%s) at %v", t.value, pos)
 		}
@@ -172,7 +172,7 @@ func NextRecord(analyzer Analyzer, position Position, texts []pdf.Text) (*LoadRe
 		pos = p
 	}
 	if rapTime != emptyStr {
-		rt, err := NewTime(rapTime.value)
+		rt, err := hakone.NewTime(rapTime.value)
 		if err != nil {
 			return &LoadResult{}, errors.Wrapf(err, "invalid format rap time of RapTo10km(%s) at %v", rapTime.value, pos)
 		}
@@ -186,7 +186,7 @@ func NextRecord(analyzer Analyzer, position Position, texts []pdf.Text) (*LoadRe
 		pos = p
 	}
 	if rapTime != emptyStr {
-		rt, err := NewTime(rapTime.value)
+		rt, err := hakone.NewTime(rapTime.value)
 		if err != nil {
 			return &LoadResult{}, errors.Wrapf(err, "invalid format rap time of RapTo15km(%s) at %v", rapTime.value, pos)
 		}
@@ -200,7 +200,7 @@ func NextRecord(analyzer Analyzer, position Position, texts []pdf.Text) (*LoadRe
 		pos = p
 	}
 	if rapTime != emptyStr {
-		rt, err := NewTime(rapTime.value)
+		rt, err := hakone.NewTime(rapTime.value)
 		if err != nil {
 			return &LoadResult{}, errors.Wrapf(err, "invalid format rap time of RapTo20km(%s) at %v", rapTime.value, pos)
 		}
@@ -217,10 +217,10 @@ func NextRecord(analyzer Analyzer, position Position, texts []pdf.Text) (*LoadRe
 			fmt.Sprintf("invalid finish status at position: %v(%v), analyzer: %s(%v)", pos, current, AnalyzerName(an), an))
 	}
 
-	record := Record{
-		Runner:            Runner(runnerName.value),
-		Grade:             Grade(grade.value),
-		Team:              Team(team.value),
+	record := hakone.Record{
+		Runner:            hakone.Runner(runnerName.value),
+		Grade:             hakone.Grade(grade.value),
+		Team:              hakone.Team(team.value),
 		TimeOf5km:         times.TimeOf5km,
 		TimeOf10km:        times.TimeOf10km,
 		TimeOf15km:        times.TimeOf15km,
@@ -229,7 +229,7 @@ func NextRecord(analyzer Analyzer, position Position, texts []pdf.Text) (*LoadRe
 		RapFrom5kmTo10km:  rap.RapTo10km,
 		RapFrom10kmTo15km: rap.RapTo15km,
 		RapFrom15kmTo20km: rap.RapTo20km,
-		Note:              Note(note.value),
+		Note:              hakone.Note(note.value),
 	}
 
 	result := LoadResult{Record: record, Position: pos, Done: finished}
@@ -246,15 +246,15 @@ func AnalyzerName(a interface{}) string {
 }
 
 type Times struct {
-	TimeOf5km    Time
-	TimeOf10km   Time
-	TimeOf15km   Time
-	TimeOf20km   Time
-	TimeOfFinish Time
+	TimeOf5km    hakone.Time
+	TimeOf10km   hakone.Time
+	TimeOf15km   hakone.Time
+	TimeOf20km   hakone.Time
+	TimeOfFinish hakone.Time
 }
 
 type Raps struct {
-	RapTo10km Time
-	RapTo15km Time
-	RapTo20km Time
+	RapTo10km hakone.Time
+	RapTo15km hakone.Time
+	RapTo20km hakone.Time
 }
