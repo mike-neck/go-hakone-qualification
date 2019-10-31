@@ -10,7 +10,6 @@ github.com/jung-kurt/gofpdf v1.0.3-0.20190309125859-24315acbbda5 h1:PJr+ZMXIecYc
 github.com/jung-kurt/gofpdf v1.0.3-0.20190309125859-24315acbbda5/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
 github.com/ledongthuc/pdf v0.0.0-20190830105003-8ac343ec9fdd h1:n2J0T+Q8GwEZVucdxZBUb4Xuy+vQYeR2vEfrpBVN8mk=
 github.com/ledongthuc/pdf v0.0.0-20190830105003-8ac343ec9fdd/go.mod h1:imJHygn/1yfhB7XSJJKlFZKl/J+dCPAknuiaGOshXAs=
-github.com/mike-neck/go-hakone-qualification v0.0.0-20191031100328-3d93030e603c h1:jXJboydtdoqdUGnc/1rmt4/v3n4q3OYOj7fPHvAuCYg=
 github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
