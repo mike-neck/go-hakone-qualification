@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/ledongthuc/pdf"
 	"github.com/pkg/errors"
+	"github.com/mike-neck/go-hakone-qualification/hakone"
 	"log"
 	"os"
 	"reflect"
@@ -19,7 +20,7 @@ func main() {
 		log.Fatalln("error", "open file", "hakone-96-personal.pdf", err)
 	}
 
-	records := make([]Record, 0)
+	records := make([]hakone.Record, 0)
 
 	maxPageNum := reader.NumPage()
 	for pageNum := 1; pageNum <= maxPageNum; pageNum++ {
