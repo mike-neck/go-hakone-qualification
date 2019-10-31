@@ -1,4 +1,4 @@
-module hakone-qualifying-result-pdf
+module github.com/mike-neck/go-hakone-qualification
 
 go 1.13
 
