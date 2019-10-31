@@ -122,7 +122,6 @@ func (d *DiscardingHeaderAnalyzer) Take(pos Position, texts []pdf.Text) (Str, An
 	}
 	p = delegate.Seek(p, texts, Str.isNotHyphen)
 	p = d.SeekToHeaderFinish(p, texts)
-	p = delegate.Seek(p, texts, Str.isNotNumber)
 
 	analyzer := RunnerNameAnalyzer(delegate)
 	return emptyStr, &analyzer, p
@@ -151,10 +150,11 @@ func (d *DiscardingHeaderAnalyzer) SeekToHeaderFinish(start Position, texts []pd
 		current, _, p := analyzer.Take(pos, texts)
 		if current.isNotHyphen() {
 			endHyphen = true
-		}
-		pos = p
-		if pos.isOutOfRangeOf(texts) {
-			return Position(len(texts))
+		} else {
+			pos = p
+			if pos.isOutOfRangeOf(texts) {
+				return Position(len(texts))
+			}
 		}
 	}
 	return pos

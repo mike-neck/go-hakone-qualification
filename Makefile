@@ -3,6 +3,8 @@
 
 build: clean build-96
 
+test: clean test-96
+
 clean:
 	rm -rf build/
 
