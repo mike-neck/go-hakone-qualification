@@ -220,7 +220,7 @@ func NextRecord(analyzer Analyzer, position Position, texts []pdf.Text) (*LoadRe
 	record := hakone.Record{
 		Runner:            hakone.Runner(runnerName.value),
 		Grade:             hakone.Grade(grade.value),
-		Team:              hakone.Team(team.value),
+		Team:              hakone.TeamName(team.value),
 		TimeOf5km:         times.TimeOf5km,
 		TimeOf10km:        times.TimeOf10km,
 		TimeOf15km:        times.TimeOf15km,

@@ -9,24 +9,24 @@ import (
 
 type Runner string
 type Grade string
-type Team string
+type TeamName string
 type Note string
 
 type Time int
 
 type Record struct {
-	Order             int    `json:"order"`
-	Runner            Runner `json:"runner"`
-	Grade             Grade  `json:"grade"`
-	Team              Team   `json:"team"`
-	TimeOf5km         Time   `json:"time_of_5_km"`
-	TimeOf10km        Time   `json:"time_of_10_km"`
-	TimeOf15km        Time   `json:"time_of_15_km"`
-	TimeOf20km        Time   `json:"time_of_20_km"`
-	FinishTime        Time   `json:"finish_time"`
-	RapFrom5kmTo10km  Time   `json:"rap_5_to_10"`
-	RapFrom10kmTo15km Time   `json:"rap_10_to_15"`
-	RapFrom15kmTo20km Time   `json:"rap_15_to_20"`
+	Order             int      `json:"order"`
+	Runner            Runner   `json:"runner"`
+	Grade             Grade    `json:"grade"`
+	Team              TeamName `json:"team"`
+	TimeOf5km         Time     `json:"time_of_5_km"`
+	TimeOf10km        Time     `json:"time_of_10_km"`
+	TimeOf15km        Time     `json:"time_of_15_km"`
+	TimeOf20km        Time     `json:"time_of_20_km"`
+	FinishTime        Time     `json:"finish_time"`
+	RapFrom5kmTo10km  Time     `json:"rap_5_to_10"`
+	RapFrom10kmTo15km Time     `json:"rap_10_to_15"`
+	RapFrom15kmTo20km Time     `json:"rap_15_to_20"`
 	Note              Note
 }
 

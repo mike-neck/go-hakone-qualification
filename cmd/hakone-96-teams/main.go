@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/ledongthuc/pdf"
+	"github.com/mike-neck/go-hakone-qualification/hakone"
 	"log"
 	"os"
 	"strings"
@@ -33,9 +34,9 @@ func main() {
 		operator.Operate(text)
 	}
 	names := operator.Names()
-	teams := make([]Team, len(names))
+	teams := make([]hakone.Team, len(names))
 	for index, name := range names {
-		teams[index] = Team{Id: index + 1, Name: name}
+		teams[index] = hakone.Team{Id: index + 1, Name: name}
 	}
 
 	jsonFile, err := os.Create("data/hakone-96-teams.jsonl")
@@ -74,11 +75,6 @@ func IsValidText(text pdf.Text) bool {
 		}
 	}
 	return false
-}
-
-type Team struct {
-	Id   int    `json:"team_id"`
-	Name string `json:"name"`
 }
 
 type Operator interface {
