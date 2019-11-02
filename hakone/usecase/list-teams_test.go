@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"github.com/mike-neck/go-hakone-qualification/hakone"
+	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -17,6 +18,16 @@ func (r *ListTeamsTestRepository) ListAllTeams() []hakone.Team {
 		result[i] = t
 	}
 	return result
+}
+
+func (r *ListTeamsTestRepository) FindTeamByName(name string) (*hakone.Team, error) {
+	teams := r.teams
+	for _, team := range teams {
+		if team.Name == name {
+			return &team, nil
+		}
+	}
+	return nil, errors.Errorf("team not found with name \"%s\"", name)
 }
 
 var listTeamsTestRepository = &ListTeamsTestRepository{

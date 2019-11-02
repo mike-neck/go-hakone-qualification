@@ -8,6 +8,7 @@ import (
 
 type TeamRepository interface {
 	ListAllTeams() []hakone.Team
+	FindTeamByName(name string) (*hakone.Team, error)
 }
 
 type TeamService struct {
