@@ -59,7 +59,7 @@ func main() {
 			continue
 		}
 
-		if p, ok := teamPlots[record.Team]; ok && p.Index < 10 {
+		if p, ok := teamPlots[record.Team]; ok && p.Index <= 10 {
 			p.Append(record)
 		}
 	}
@@ -113,21 +113,26 @@ type TeamPlot struct {
 }
 
 func NewTeamPlot(name string, red, green, blue uint8) *TeamPlot {
-	return &TeamPlot{
+	tp := TeamPlot{
 		Name:  name,
-		Index: 0,
+		Index: 1,
 		Sum:   0,
-		Plots: make([]SinglePlot, 10),
+		Plots: make([]SinglePlot, 11),
 		Color: color.RGBA{R: red, G: green, B: blue, A: 255},
 	}
+	tp.Plots[0] = SinglePlot{
+		Index: 0,
+		Sum:   0,
+	}
+	return &tp
 }
 
-var even3Minutes30Seconds = (3*60+30)*21 + 21
+var even3Minutes30Seconds = (10*60*60 + 57*60) / 10
 
 func (tp *TeamPlot) Append(record hakone.Record) {
 	tp.Sum += even3Minutes30Seconds - int(record.FinishTime)
 	tp.Plots[tp.Index] = SinglePlot{
-		Index: tp.Index + 1,
+		Index: tp.Index,
 		Sum:   tp.Sum,
 	}
 	tp.Index += 1
