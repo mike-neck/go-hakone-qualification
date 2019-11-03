@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := build
 .PHONY: build
 
-build: clean build-96 build-96-teams
+build: clean build-96 build-96-teams build-96-img
 
 test: clean hakone-test test-96
 
@@ -21,3 +21,6 @@ test-96:
 
 build-96-teams:
 	go build -o build/hakone-96-teams ./cmd/hakone-96-teams/
+
+build-96-img:
+	go build -o build/hakone-96-img ./cmd/hakone-96-data-img/
